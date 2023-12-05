@@ -1,9 +1,30 @@
-const titulo = document.getElementById("titulo");
-const slogan = document.getElementById("slogan");
-const containerCard = document.getElementById("containerCard");
+const containerCard = document.querySelector("div#containerCard.container");
+const btnCarrito = document.querySelector("img#imgCarrito.imgCarrito");
+const inputBuscar = document.querySelector("input#inputBuscar");
 
-titulo.textContent = "Tienda Online"
-slogan.textContent = "Bienvenidos a tu tienda de Jockey's favorita"
+const carrito = [];
+
+btnCarrito.addEventListener("mousemove", () => {
+    if (carrito.length > 0) {
+        btnCarrito.title = `${carrito.length} producto(s) en el carrito.`;
+    } else {
+        btnCarrito.title = "0 produto(s) en el carrito.";
+    }
+})
+
+btnCarrito.addEventListener("click", () => {
+    if (carrito.length > 0) {
+        location.href = "carrito.html";
+    } else {
+        alert("No hay productos en el carrito");
+    }
+});
+
+inputBuscar.addEventListener("search", () => {
+    let param = inputBuscar.value.trim().toLowerCase();
+    let productoABuscar = productos.filter((producto) => producto.nombre.toLowerCase().includes(param));
+    console.table(productoABuscar);
+});
 
 function armarCardHTML(producto) {
     return `<div class="card">
@@ -24,9 +45,23 @@ function armarCardError() {
             </div>`
 }
 
+function agregarClickABtnCards() {
+    const btnAgregar = document.querySelectorAll("button.btn.btn-primary");
+    if (btnAgregar.length > 0) {
+        btnAgregar.forEach((boton) => {
+            boton.addEventListener("click", () => {
+                let productoSeleccinado = productos.find((producto) => producto.id === parseInt(boton.id))
+                carrito.push(productoSeleccinado)
+                console.log("Producto agregado al carrito:", productoSeleccinado.nombre);
+            });
+        })
+    }
+}
+
 function cargarProductos() {
     if (productos.length > 0) {
         productos.forEach((producto) => containerCard.innerHTML += armarCardHTML(producto))
+        agregarClickABtnCards()
     } else {
         containerCard.innerHTML = armarCardError()
     }
