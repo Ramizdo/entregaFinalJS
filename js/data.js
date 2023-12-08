@@ -1,5 +1,5 @@
 const productos = [
-    { id: 1, nombre: 'Jockey Atlanta Braves', imagen: src = 'images/jockey-atlanta-braves.jpeg', precio: 29990, categoria: 'Mlb' },
+    { id: 1, nombre: 'Jockey Atlanta Braves', imagen: 'images/jockey-atlanta-braves.jpeg', precio: 29990, categoria: 'Mlb' },
     { id: 2, nombre: 'Jockey Boston Celtics', imagen: 'images/jockey-boston-celtics.jpeg', precio: 27990, categoria: 'Nba' },
     { id: 3, nombre: 'Jockey Houston Astros', imagen: 'images/jockey-houston-astros.jpeg', precio: 39990, categoria: 'Mlb' },
     { id: 4, nombre: 'Jockey Boston Red Sox', imagen: 'images/jockey-boston-red-sox-mlb.jpeg', precio: 16990, categoria: 'Mlb' },
@@ -12,3 +12,8 @@ const productos = [
     { id: 11, nombre: 'Jockey Toronto Blue Jays', imagen: 'images/jockey-toronto-blue-jays.jpeg', precio: 29990, categoria: 'Mlb' },
     { id: 12, nombre: 'Jockey Washington Nationals', imagen: 'images/jockey-washington-nationals.jpeg', precio: 13990, categoria: 'Mlb' },
 ]
+
+function recuperarCarrito() {
+    let carritoRecuperado = JSON.parse(localStorage.getItem("miCarrito"))
+    return carritoRecuperado
+}

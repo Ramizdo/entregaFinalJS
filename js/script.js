@@ -1,8 +1,8 @@
+const carrito = recuperarCarrito();
+
 const containerCard = document.querySelector("div#containerCard.container");
 const btnCarrito = document.querySelector("img#imgCarrito.imgCarrito");
 const inputBuscar = document.querySelector("input#inputBuscar");
-
-const carrito = [];
 
 btnCarrito.addEventListener("mousemove", () => {
     if (carrito.length > 0) {
@@ -14,7 +14,7 @@ btnCarrito.addEventListener("mousemove", () => {
 
 btnCarrito.addEventListener("click", () => {
     if (carrito.length > 0) {
-        location.href = "carrito.html";
+        location.href = "pages/carrito.html";
     } else {
         alert("No hay productos en el carrito");
     }
@@ -52,7 +52,7 @@ function agregarClickABtnCards() {
             boton.addEventListener("click", () => {
                 let productoSeleccinado = productos.find((producto) => producto.id === parseInt(boton.id))
                 carrito.push(productoSeleccinado)
-                console.log("Producto agregado al carrito:", productoSeleccinado.nombre);
+                localStorage.setItem("miCarrito", JSON.stringify(carrito))
             });
         })
     }
