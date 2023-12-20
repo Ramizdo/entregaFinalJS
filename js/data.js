@@ -13,7 +13,12 @@ const productos = [
     { id: 12, nombre: 'Jockey Washington Nationals', imagen: 'images/jockey-washington-nationals.jpeg', precio: 13990, categoria: 'Mlb' },
 ]
 
+const carrito = recuperarCarrito();
+
 function recuperarCarrito() {
-    let carritoRecuperado = JSON.parse(localStorage.getItem("miCarrito"))
-    return carritoRecuperado
+    return JSON.parse(localStorage.getItem("miCarrito")) || []
+}
+
+function enviarAlStorage() {
+    localStorage.setItem("miCarrito", JSON.stringify(carrito))
 }

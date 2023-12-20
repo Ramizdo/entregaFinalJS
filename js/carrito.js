@@ -1,36 +1,34 @@
-const carrito = recuperarCarrito();
-
 const tableBody = document.querySelector("tbody")
 
-function retornarFilaHTML(producto) {
+function retornarFilaHTML({ imagen, nombre, precio, id }) {
     return `<tr>
-                <td><img src="${producto.imagen}"></td>
-                <td>${producto.nombre}</td>
-                <td>${producto.precio}</td>
-                <td id="${producto.id}" class="eliminar-producto">⛔️</td>
+                <td><img src="${imagen}"></td>
+                <td>${nombre}</td>
+                <td>${precio}</td>
+                <td id="${id}" class="eliminar-producto">⛔️</td>
             </tr>`
 }
 
-function activarBotonesEliminar() {
-    const botonesEliminar = document.querySelectorAll("td.eliminar-producto")
-    console.log(botonesEliminar)
+function eliminarProducto() {
+    const btnEliminar = document.querySelectorAll("td.eliminar-producto")
 
-    botonesEliminar.forEach((botonEliminar) => {
+    btnEliminar.forEach((botonEliminar) => {
         botonEliminar.addEventListener("click", () => {
-            const idx = carrito.findIndex((producto) => producto.id === parseInt(botonEliminar.id))
-            carrito.splice(idx, 1)
-            cargarProductos()
+            const idABorrar = carrito.findIndex((producto) => producto.id === parseInt(botonEliminar.id));
+            carrito.splice(idABorrar, 1);
+            enviarAlStorage();
+            cargarProductosEnCarrito();
         })
     })
 }
 
-function cargarProductos() {
+function cargarProductosEnCarrito() {
     if (carrito.length > 0) {
         tableBody.innerHTML = ""
 
         carrito.forEach((producto) => tableBody.innerHTML += retornarFilaHTML(producto))
-        activarBotonesEliminar()
+        eliminarProducto()
     }
 }
 
-cargarProductos()
+cargarProductosEnCarrito()
