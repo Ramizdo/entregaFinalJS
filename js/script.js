@@ -7,7 +7,13 @@ imgCarrito.addEventListener("mousemove", () => {
 })
 
 imgCarrito.addEventListener("click", () => {
-    carrito.length > 0 ? location.href = "pages/carrito.html" : alert("No hay productos en el carrito")
+    carrito.length > 0 ? location.href = "pages/carrito.html" : Swal.fire({
+        icon: "error",
+        iconColor: "#000000",
+        text: "No hay productos en el carrito.",
+        confirmButtonColor: "#000000",
+        focusConfirm: false,
+    });
 });
 
 buscarProducto.addEventListener("search", () => {
@@ -29,17 +35,22 @@ function crearArticulos(producto) {
             </div>`
 }
 
-function mostrarError() {
+function crearArticulosError() {
 
     Swal.fire({
         icon: "error",
-        title: "Oops...",
-        text: "No hemos podido cargar los productos.",
-        footer: '<a href="index.html">Intentalo nuevamente.</a>'
+        iconColor: "#000000",
+        title: "¡Error!",
+        text: "No hay productos para mostrar.",
+        color: "#000000",
+        showConfirmButton: false,
+        timer: 3000,
     });
 
+    setTimeout(redirigir, 5000)
+
     return `<div class="mensaje-error">
-    <p>Gracias por tu comprension, intento de nuevo mas tarde.</p>
+                <p>Gracias por tu comprension, intentalo de nuevo mas tarde.</p>
             </div>`
 
 }
@@ -51,6 +62,7 @@ function agregarAlCarrito() {
             boton.addEventListener("click", () => {
                 let productoSeleccinado = productos.find((producto) => producto.id === parseInt(boton.id))
                 carrito.push(productoSeleccinado)
+                mostrarAgregadoEliminadoConExito("Agregado con exito")
                 enviarAlStorage()
             });
         })
@@ -64,7 +76,7 @@ function mostrarProductos(array) {
         array.forEach((producto) => containerCard.innerHTML += crearArticulos(producto))
         agregarAlCarrito()
     } else {
-        containerCard.innerHTML = mostrarError()
+        containerCard.innerHTML = crearArticulosError()
     }
 }
 
