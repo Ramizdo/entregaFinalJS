@@ -1,9 +1,10 @@
 const tableBody = document.querySelector("tbody")
 const btnComprar = document.querySelector("button#btnComprar")
 
-function retornarFilaHTML({ imagen, nombre, precio, id }) {
+function retornarFilaHTML(producto) {
+    let { imagen, nombre, precio, id } = producto
     return `<tr>
-                <td><img src="${imagen}"></td>
+                <!-- <td><img src="${imagen}"></td> -->
                 <td>${nombre}</td>
                 <td>${precio}</td>
                 <td id="${id}" class="eliminar-producto">⛔️</td>
@@ -21,7 +22,7 @@ function calcularTotal() {
 function mostrarTotal(total) {
     tableBody.innerHTML += `  
         <tr>
-            <td colspan="1"></td>
+            
             <td><strong>Total:</strong></td>
             <td>$${total}</td>
         </tr>

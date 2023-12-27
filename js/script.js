@@ -1,6 +1,7 @@
 const containerCard = document.querySelector("div#containerCard.container");
 const imgCarrito = document.querySelector("img#imgCarrito.imgCarrito");
 const buscarProducto = document.querySelector("input#buscarProducto");
+const URL = 'json/jockeys.json'
 
 imgCarrito.addEventListener("mousemove", () => {
     imgCarrito.title = carrito.length > 0 ? `${carrito.length} producto(s) en el carrito.` : "0 produto(s) en el carrito."
@@ -50,7 +51,7 @@ function crearArticulosError() {
     setTimeout(redirigir, 5000)
 
     return `<div class="mensaje-error">
-                <p>Gracias por tu comprension, intentalo de nuevo mas tarde.</p>
+                <p>Intentalo nuevamente.</p>
             </div>`
 
 }
@@ -69,6 +70,18 @@ function agregarAlCarrito() {
     }
 }
 
+async function cargarProductos() {
+    try {
+        const response = await fetch(URL)
+        const data = await response.json()
+        productos.push(...data)
+        mostrarProductos(productos)
+    } catch (error) {
+        divContenedor.innerHTML = crearArticulosError()
+    }
+}
+
+
 function mostrarProductos(array) {
     containerCard.innerHTML = ""
 
@@ -80,4 +93,4 @@ function mostrarProductos(array) {
     }
 }
 
-mostrarProductos(productos)
+cargarProductos()
