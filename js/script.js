@@ -1,7 +1,6 @@
 const containerCard = document.querySelector("div#containerCard.container");
 const imgCarrito = document.querySelector("img#imgCarrito.imgCarrito");
 const buscarProducto = document.querySelector("input#buscarProducto");
-const URL = 'json/jockeys.json'
 
 imgCarrito.addEventListener("mousemove", () => {
     imgCarrito.title = carrito.length > 0 ? `${carrito.length} producto(s) en el carrito.` : "0 produto(s) en el carrito."
@@ -27,7 +26,7 @@ function crearArticulos(producto) {
     let { imagen, categoria, nombre, precio, id } = producto
 
     return `<div class="card">
-                <img src="${imagen}" class="card__img" alt="${categoria}">
+                <img src="/ecommerce/imagen/${imagen}" class="card__img" alt="${categoria}">
                 <div class="card__body">
                     <h5 class="card__body__producto">${nombre}</h5>
                     <p class="card__body__precio">$${precio}</p>

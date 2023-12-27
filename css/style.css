@@ -98,6 +98,10 @@ h2 {
     height: 200px;
 }
 
+.card__img--carrito {
+    height: 100px;
+}
+
 .mensaje-error {
     width: auto;
     height: 400px;
